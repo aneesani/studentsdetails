@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>STUDENTS DETAILS</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-6">
+        <h4>ADD DETAILS</h4>
+        <form method="post" class="p-3 shadow">
+                {% csrf_token %}
+        <div class="form-group">
+    <input type="text" name="name"  class="form-control"  placeholder="Name ">
+        </div>
+    <input type="text" name="age"  class="form-control"  placeholder=" age">
+      <div class="form-group"><br>
+          <input type="text" name="place"  class="form-control"  placeholder=" place">
+      </div>
+    <input type="text" name="course"  class="form-control"  placeholder=" course">
+      <div class="form-group"><br>
+           <input type="date" name="date"  class="form-control"  placeholder=" date">
+      </div>
+
+
+    <input type="submit"  class="btn btn-success">
+
+</form>
+
+    </div>
+
+    <div class="col-md-6">
+        <h4>TASK COMPLETED</h4>
+        {% for i in tsk %}
+        <div class="shadow card bg-light mb-3">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                <p><b>Name : {{i.name}}</b></p>
+                <p><b>Age : {{i.age}}</b></p>
+                <p><b>Place : {{i.place}}</b></p>
+                <p><b>Course : {{i.course}}</b></p>
+                <p><b>Date : {{i.date}}</b></p>
+                <a class="btn btn-danger" href="{% url 'delete' i.id %}">Delete</a>
+                <a class="btn btn-success" href="{% url 'update' i.id %}">update</a>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+ ---> <br>
+
+{% endblock %}
